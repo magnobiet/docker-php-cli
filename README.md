@@ -5,7 +5,14 @@
 ## Build
 
 ```bash
-docker build . -t magnobiet/php:7.2-cli-alpine
+docker build . -t magnobiet/php:7.4-cli-alpine
+```
+
+## Publish
+
+```bash
+docker login
+docker push magnobiet/php:7.4-cli-alpine
 ```
 
 ## Setup
@@ -24,7 +31,7 @@ function __php() {
     --volume $(pwd):/app \
     --workdir /app \
     --network host \
-    magnobiet/php:7.2-cli-alpine \
+    magnobiet/php:7.4-cli-alpine \
     php "$@"
 
 }
@@ -36,6 +43,7 @@ function __php_composer() {
     --interactive \
     --rm \
     --user $(id -u):$(id -g) \
+    --network host \
     --volume /etc/passwd:/etc/passwd:ro \
     --volume /etc/group:/etc/group:ro \
     --volume $(pwd):/app \
